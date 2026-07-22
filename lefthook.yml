@@ -1,0 +1,24 @@
+# Git hooks — installed automatically by the `prepare` script on `bun install`.
+# https://lefthook.dev/configuration/
+
+pre-commit:
+  # Sequential on purpose: eslint --fix and prettier both rewrite the same
+  # staged files; parallel runs would race.
+  piped: true
+  commands:
+    1_eslint:
+      glob: '*.{js,jsx,ts,tsx,mjs,cjs}'
+      run: bunx eslint --fix --no-warn-ignored {staged_files}
+      stage_fixed: true
+    2_prettier:
+      glob: '*.{js,jsx,ts,tsx,mjs,cjs,json,md,yml,yaml}'
+      run: bunx prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
+
+pre-push:
+  parallel: true
+  commands:
+    typecheck:
+      run: bun run typecheck
+    unit-tests:
+      run: bun run test
