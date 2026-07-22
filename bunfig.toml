@@ -1,0 +1,4 @@
+[test]
+# Mock expo-constants before any module under test imports it —
+# services/rejseplanen/client.ts snapshots the config at import time.
+preload = ["./test/setup.ts"]
