@@ -35,7 +35,8 @@ export function StopRow({
         hitSlop={12}
         onPress={onToggleFavorite}
         accessibilityRole="button"
-        accessibilityLabel={favorite ? 'Remove favorite' : 'Add favorite'}>
+        accessibilityLabel={favorite ? 'Remove favorite' : 'Add favorite'}
+      >
         <IconSymbol name={favorite ? 'star.fill' : 'star'} size={24} color={tint} />
       </Pressable>
     </Pressable>

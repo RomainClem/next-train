@@ -62,8 +62,7 @@ function parseDateTime(date: string, time: string): Date {
 /** Normalise a raw departure: effective time, delay, cancellation. */
 export function normaliseDeparture(dep: Departure, index: number): NormalisedDeparture {
   const scheduled = parseDateTime(dep.date, dep.time);
-  const when =
-    dep.rtDate && dep.rtTime ? parseDateTime(dep.rtDate, dep.rtTime) : scheduled;
+  const when = dep.rtDate && dep.rtTime ? parseDateTime(dep.rtDate, dep.rtTime) : scheduled;
   const delayMinutes = Math.round((when.getTime() - scheduled.getTime()) / 60000);
   return {
     key: `${dep.name}-${dep.date}-${dep.time}-${index}`,
@@ -78,11 +77,7 @@ export function normaliseDeparture(dep: Departure, index: number): NormalisedDep
 }
 
 /** Departure board, normalised and sorted by effective time. */
-export async function departureBoardNormalised(
-  extId: string,
-): Promise<NormalisedDeparture[]> {
+export async function departureBoardNormalised(extId: string): Promise<NormalisedDeparture[]> {
   const raw = await departureBoard(extId);
-  return raw
-    .map(normaliseDeparture)
-    .sort((a, b) => a.when.getTime() - b.when.getTime());
+  return raw.map(normaliseDeparture).sort((a, b) => a.when.getTime() - b.when.getTime());
 }

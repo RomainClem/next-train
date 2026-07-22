@@ -1,10 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import {
-  departureBoardNormalised,
-  nearbyStops,
-  searchStops,
-} from '@/services/rejseplanen/api';
+import { departureBoardNormalised, nearbyStops, searchStops } from '@/services/rejseplanen/api';
 
 /**
  * React Query hooks for Rejseplanen data. Query keys are namespaced so caches

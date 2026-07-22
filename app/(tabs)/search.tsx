@@ -1,14 +1,7 @@
 import * as Location from 'expo-location';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  TextInput,
-  View,
-} from 'react-native';
+import { ActivityIndicator, FlatList, Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { StopRow } from '@/components/stop-row';
@@ -104,9 +97,7 @@ export default function SearchScreen() {
         <ThemedText style={{ color: Colors[scheme].tint }}>Use my location</ThemedText>
       </Pressable>
 
-      {locationError ? (
-        <ThemedText style={styles.error}>{locationError}</ThemedText>
-      ) : null}
+      {locationError ? <ThemedText style={styles.error}>{locationError}</ThemedText> : null}
 
       {locating || active.isLoading ? (
         <View style={styles.center}>

@@ -1,10 +1,6 @@
 import { expect, type Page } from '@playwright/test';
 
-import {
-  departureResponse,
-  nearbyResponse,
-  searchResponse,
-} from './fixtures';
+import { departureResponse, nearbyResponse, searchResponse } from './fixtures';
 
 /**
  * Shared E2E helpers: network mocking for the Rejseplanen API, store seeding
@@ -43,8 +39,7 @@ export async function mockApi(page: Page, mocks: ApiMocks = {}): Promise<void> {
 
   await page.route(/rejseplanen\.dk\/api\//, async (route) => {
     const url = route.request().url();
-    const endpoint =
-      Object.keys(replies).find((e) => url.includes(`/${e}`)) ?? '';
+    const endpoint = Object.keys(replies).find((e) => url.includes(`/${e}`)) ?? '';
     const reply = replies[endpoint] ?? {};
 
     const status = isStatusReply(reply) ? reply.httpStatus : 200;
@@ -79,10 +74,7 @@ export async function seedStore(
     selectedExtId: state.selectedExtId ?? null,
   };
   await page.addInitScript((s) => {
-    window.localStorage.setItem(
-      'next-train-stops',
-      JSON.stringify({ state: s, version: 0 }),
-    );
+    window.localStorage.setItem('next-train-stops', JSON.stringify({ state: s, version: 0 }));
   }, payload);
 }
 

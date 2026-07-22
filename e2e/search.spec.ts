@@ -15,9 +15,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('shows the initial hint before typing', async ({ page }) => {
-  await expect(
-    page.getByText('Search by name or use your location.'),
-  ).toBeVisible();
+  await expect(page.getByText('Search by name or use your location.')).toBeVisible();
 });
 
 test('typing a query returns matching stops', async ({ page }) => {
@@ -31,9 +29,7 @@ test('does not search for a single character', async ({ page }) => {
   await page.getByTestId('search-input').fill('s');
 
   // Query is disabled under 2 chars, so the initial hint stays put.
-  await expect(
-    page.getByText('Search by name or use your location.'),
-  ).toBeVisible();
+  await expect(page.getByText('Search by name or use your location.')).toBeVisible();
   await expect(page.getByText('Sorgenfri St.')).toHaveCount(0);
 });
 
@@ -61,9 +57,7 @@ test('clear button empties the field and restores the hint', async ({ page }) =>
   await page.getByTestId('search-clear').click();
 
   await expect(input).toHaveValue('');
-  await expect(
-    page.getByText('Search by name or use your location.'),
-  ).toBeVisible();
+  await expect(page.getByText('Search by name or use your location.')).toBeVisible();
 });
 
 test('favouriting a stop toggles the star label', async ({ page }) => {

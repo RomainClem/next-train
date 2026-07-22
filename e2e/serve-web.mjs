@@ -50,7 +50,9 @@ createServer((req, res) => {
   // Static-rendered SPA: unknown routes fall back to index.html so
   // client-side navigation still resolves.
   const file =
-    pathname === '/' ? join(ROOT, 'index.html') : (resolveFile(pathname) ?? join(ROOT, 'index.html'));
+    pathname === '/'
+      ? join(ROOT, 'index.html')
+      : (resolveFile(pathname) ?? join(ROOT, 'index.html'));
 
   res.setHeader('Content-Type', TYPES[extname(file)] ?? 'application/octet-stream');
   res.setHeader('Access-Control-Allow-Origin', '*');

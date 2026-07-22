@@ -12,13 +12,7 @@ function hhmm(d: Date): string {
   return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 }
 
-export function DepartureRow({
-  departure,
-  now,
-}: {
-  departure: NormalisedDeparture;
-  now: number;
-}) {
+export function DepartureRow({ departure, now }: { departure: NormalisedDeparture; now: number }) {
   const mins = minutesUntil(departure.when, now);
   const delayed = departure.delayMinutes > 0;
 

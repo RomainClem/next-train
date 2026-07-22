@@ -15,11 +15,7 @@ const defaultResolveRequest = config.resolver.resolveRequest;
 config.resolver.resolveRequest = (context, moduleName, platform) => {
   const resolve = defaultResolveRequest ?? context.resolveRequest;
   if (moduleName === 'zustand' || moduleName.startsWith('zustand/')) {
-    return resolve(
-      { ...context, unstable_enablePackageExports: false },
-      moduleName,
-      platform,
-    );
+    return resolve({ ...context, unstable_enablePackageExports: false }, moduleName, platform);
   }
   return resolve(context, moduleName, platform);
 };

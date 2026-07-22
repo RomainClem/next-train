@@ -16,7 +16,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ...config.extra,
     rejseplanenAccessId: process.env.REJSEPLANEN_ACCESS_ID ?? '',
     // Host your key is provisioned for. Verify with the curl in the plan.
-    rejseplanenBaseUrl:
-      process.env.REJSEPLANEN_BASE_URL ?? 'https://www.rejseplanen.dk/api',
+    rejseplanenBaseUrl: process.env.REJSEPLANEN_BASE_URL ?? 'https://www.rejseplanen.dk/api',
   },
 });

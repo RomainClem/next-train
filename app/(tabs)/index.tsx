@@ -52,9 +52,7 @@ export default function DeparturesScreen() {
           data={data ?? []}
           keyExtractor={(d) => d.key}
           renderItem={({ item }) => <DepartureRow departure={item} now={now} />}
-          refreshControl={
-            <RefreshControl refreshing={isRefetching} onRefresh={() => refetch()} />
-          }
+          refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={() => refetch()} />}
           ListEmptyComponent={
             <View style={styles.center}>
               <ThemedText style={styles.hint}>

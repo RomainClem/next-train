@@ -19,9 +19,7 @@ test('shows an empty state with no favourites', async ({ page }) => {
   await openTab(page, 'favorites');
 
   await expect(page.getByText('No favorites yet')).toBeVisible();
-  await expect(
-    page.getByText('Tap the star on a stop in Search to save it here.'),
-  ).toBeVisible();
+  await expect(page.getByText('Tap the star on a stop in Search to save it here.')).toBeVisible();
 });
 
 test('lists a saved favourite', async ({ page }) => {
