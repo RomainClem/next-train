@@ -20,6 +20,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Departures',
+          tabBarButtonTestID: 'tab-departures',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="tram.fill" color={color} />,
         }}
       />
@@ -27,6 +28,7 @@ export default function TabLayout() {
         name="search"
         options={{
           title: 'Search',
+          tabBarButtonTestID: 'tab-search',
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="magnifyingglass" color={color} />
           ),
@@ -36,6 +38,7 @@ export default function TabLayout() {
         name="favorites"
         options={{
           title: 'Favorites',
+          tabBarButtonTestID: 'tab-favorites',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="star.fill" color={color} />,
         }}
       />

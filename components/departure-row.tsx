@@ -23,7 +23,7 @@ export function DepartureRow({
   const delayed = departure.delayMinutes > 0;
 
   return (
-    <View style={styles.row}>
+    <View testID="departure-row" style={styles.row}>
       <View style={styles.left}>
         <ThemedText type="defaultSemiBold">{departure.name}</ThemedText>
         <ThemedText numberOfLines={1} style={styles.direction}>

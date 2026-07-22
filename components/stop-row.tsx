@@ -21,7 +21,7 @@ export function StopRow({
   const tint = Colors[colorScheme].tint;
 
   return (
-    <Pressable style={styles.row} onPress={onPress}>
+    <Pressable testID={`stop-${stop.extId}`} style={styles.row} onPress={onPress}>
       <View style={styles.left}>
         <ThemedText type="defaultSemiBold" numberOfLines={1}>
           {stop.name}
@@ -31,6 +31,7 @@ export function StopRow({
         ) : null}
       </View>
       <Pressable
+        testID={`fav-${stop.extId}`}
         hitSlop={12}
         onPress={onToggleFavorite}
         accessibilityRole="button"

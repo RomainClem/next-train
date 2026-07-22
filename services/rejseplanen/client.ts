@@ -35,14 +35,24 @@ export async function request<T extends { errorCode?: string; errorText?: string
     );
   }
 
-  const url = new URL(`${BASE_URL}/${endpoint}`);
-  url.searchParams.set('accessId', ACCESS_ID);
-  url.searchParams.set('format', 'json');
+  // Build the query string by hand: React Native's Hermes runtime ships a
+  // `URL` polyfill that does NOT implement `searchParams`, so using it here
+  // would silently drop every parameter (accessId, input, …) and the request
+  // would come back empty.
+  const query: Record<string, string | number> = {
+    accessId: ACCESS_ID,
+    format: 'json',
+  };
   for (const [k, v] of Object.entries(params)) {
-    if (v !== undefined && v !== '') url.searchParams.set(k, String(v));
+    if (v !== undefined && v !== '') query[k] = v;
   }
+  const qs = Object.entries(query)
+    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
+    .join('&');
 
-  const res = await fetch(url.toString(), { headers: { Accept: 'application/json' } });
+  const res = await fetch(`${BASE_URL}/${endpoint}?${qs}`, {
+    headers: { Accept: 'application/json' },
+  });
   if (!res.ok) {
     throw new RejseplanenError(`HTTP ${res.status} calling ${endpoint}`);
   }

@@ -83,6 +83,7 @@ export default function SearchScreen() {
       <View style={styles.searchBar}>
         <IconSymbol name="magnifyingglass" size={20} color={Colors[scheme].icon} />
         <TextInput
+          testID="search-input"
           style={[styles.input, { color: Colors[scheme].text }]}
           placeholder="Search stop or station…"
           placeholderTextColor={Colors[scheme].icon}
@@ -92,13 +93,13 @@ export default function SearchScreen() {
           returnKeyType="search"
         />
         {text ? (
-          <Pressable hitSlop={10} onPress={() => setText('')}>
+          <Pressable testID="search-clear" hitSlop={10} onPress={() => setText('')}>
             <IconSymbol name="xmark" size={18} color={Colors[scheme].icon} />
           </Pressable>
         ) : null}
       </View>
 
-      <Pressable style={styles.locationBtn} onPress={useMyLocation}>
+      <Pressable testID="use-location" style={styles.locationBtn} onPress={useMyLocation}>
         <IconSymbol name="location.fill" size={18} color={Colors[scheme].tint} />
         <ThemedText style={{ color: Colors[scheme].tint }}>Use my location</ThemedText>
       </Pressable>
@@ -130,11 +131,19 @@ export default function SearchScreen() {
           )}
           ListEmptyComponent={
             <View style={styles.center}>
-              <ThemedText style={styles.hint}>
-                {showingSearch || coords
-                  ? 'No stops found.'
-                  : 'Search by name or use your location.'}
-              </ThemedText>
+              {active.isError ? (
+                <ThemedText style={styles.error}>
+                  {active.error instanceof Error
+                    ? active.error.message
+                    : 'Something went wrong. Pull to retry.'}
+                </ThemedText>
+              ) : (
+                <ThemedText style={styles.hint}>
+                  {showingSearch || coords
+                    ? 'No stops found.'
+                    : 'Search by name or use your location.'}
+                </ThemedText>
+              )}
             </View>
           }
         />
