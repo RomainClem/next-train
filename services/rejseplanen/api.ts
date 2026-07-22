@@ -14,7 +14,7 @@ import type {
  */
 
 /** Tolerant extraction of stops from either JSON shape the API may return. */
-function extractStops(res: LocationResponse | NearbyStopsResponse): StopLocation[] {
+export function extractStops(res: LocationResponse | NearbyStopsResponse): StopLocation[] {
   if (Array.isArray(res.StopLocation)) return res.StopLocation;
   if (Array.isArray(res.stopLocationOrCoordLocation)) {
     return res.stopLocationOrCoordLocation
@@ -53,7 +53,7 @@ export async function departureBoard(extId: string): Promise<Departure[]> {
 }
 
 /** Parse HAFAS "YYYY-MM-DD" + "HH:MM:SS" (local) into a Date. */
-function parseDateTime(date: string, time: string): Date {
+export function parseDateTime(date: string, time: string): Date {
   const [y, m, d] = date.split('-').map(Number);
   const [hh, mm, ss] = time.split(':').map(Number);
   return new Date(y, (m ?? 1) - 1, d ?? 1, hh ?? 0, mm ?? 0, ss ?? 0);
