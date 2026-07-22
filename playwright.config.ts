@@ -41,8 +41,9 @@ export default defineConfig({
     url: HOST,
     // Never reuse: a leftover server could be a stale build.
     reuseExistingServer: false,
-    // A cold export (first run / cleared cache) can take a couple of minutes.
-    timeout: 240_000,
+    // A cold export (first run / cleared cache / CI runner) can take several
+    // minutes — CI runners have no Metro cache at all.
+    timeout: 300_000,
     stdout: 'pipe',
     stderr: 'pipe',
     env: {
